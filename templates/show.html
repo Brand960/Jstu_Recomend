@@ -35,7 +35,7 @@
 				</tr>
 				{%for item in res_book%}
 				  <tr>
-						<td><font size="2px">{{item.title}}</font></td>
+						<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></font></td>
 						<td><font size="2px">{{item.author}}</font></td>
 						<td><font size="2px">{{item.callId}}</font></td>
 						<td><font size="2px">{{item.isbn}}</font></td>

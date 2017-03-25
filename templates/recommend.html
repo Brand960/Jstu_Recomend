@@ -18,7 +18,7 @@
 	<div class="row" id="icon">
 		<div class="col-md-11">
 		<span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
-		<span>以下结果根据 <b>{{res_paper.title}}</b> 进行推荐</span>
+		<span>以下结果根据 <b>{%if res_paper%}{{res_paper.title}}{% else %}{{res_book.title}}{% endif%}</b> 进行推荐</span>
 		</div>
 	</div>
 	<div class="row" id="content">
@@ -46,15 +46,37 @@
 				  </tr>
 				 {%endfor%}
 		</table>	
+	{% elif res_rec_book %}
+		<table class="table table-hover" >
+				<tr class="info" style="height:75px;">
+					<td><a href='/recommend/?id={{item.id}}&type=book'>标题</a></td>
+					<td>作者</td>
+					<td>标识</td>
+					<td>分类</td>
+					<td><font size="2px">出版日期</font ></td>
+					<td><font size="2px">点击数</font></td>
+				</tr>
+				{%for item in res_rec_book%}
+				  <tr>
+						<td><font size="2px">{{item.title}}</font></td>
+						<td><font size="2px">{{item.author}}</font></td>
+						<td><font size="2px">{{item.callId}}</font></td>
+						<td><font size="2px">{{item.isbn}}</font></td>
+						<!--<td>{{item.publisher}}</td>-->
+						<td><font size="2px">{{item.pubYear}}</font></td>
+						<td>{{item.likeCount}}</td>
+				  </tr>
+				 {%endfor%}
+		</table>	
 	{% else %}
-		<span> &nbsp &nbsp &nbsp抱歉！系统并未有关于<b>{{res_paper.title}}</b> 的推荐</span>
+		<span> &nbsp &nbsp &nbsp抱歉！系统并未有关于<b>{%if res_paper%}{{res_paper.title}}{% else %}{{res_book.title}}{% endif%}</b> 的推荐</span>
 		<br>&nbsp &nbsp &nbsp你可以看看：
 	<div class="row" id="content">
 		<div class="col-md-5">
 			<a href="#" class="list-group-item active">随机图书鉴赏</a>
 			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
 				{%for item in res_book_r%}
-			  <li class="list-group-item">{{item.title}}</li>
+			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></li>
 				{%endfor%}
 			</ul>
 			<!--推荐books：<br>

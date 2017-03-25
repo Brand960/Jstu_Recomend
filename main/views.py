@@ -80,18 +80,25 @@ def show(request):
 def recommend(request):	
 	
 	if request.GET['id']:
-		_id=request.GET['id']
-		#res_book=get_by_id("book",_id)
-		res_paper=get_by_id("paper",_id)
-		#res_rec_book=recommend_by_id("book",_id)
-		if request.GET['type']=="paper":
-			res_rec_paper=recommend_by_id("paper",_id)
 		_page= str(random.randint(1, 2000))
 		_size=str(10)
 		res_book_r=get_by_page("book",_page,_size)
 		res_paper_r=get_by_page("paper",_page,_size)
-		return render(request,'recommend.html',{'res_paper':res_paper,"res_paper_r":res_paper_r,"res_book_r":res_book_r,
+		
+		_id=request.GET['id']
+
+		if request.GET['type']=="paper":
+			res_paper=get_by_id("paper",_id)
+			res_rec_paper=recommend_by_id("paper",_id)
+			return render(request,'recommend.html',{'res_paper':res_paper,"res_paper_r":res_paper_r,"res_book_r":res_book_r,
 																		'res_rec_paper':res_rec_paper,})
+		if request.GET['type']=="book":
+			res_book=get_by_id("book",_id)
+			res_rec_book=recommend_by_id("book",_id)
+			return render(request,'recommend.html',{'res_book':res_book,"res_paper_r":res_paper_r,"res_book_r":res_book_r,
+																		'res_rec_book':res_rec_book,})
+		
+		
 	return HttpResponse("抱歉！未知错误，请刷新试试")
 	
 	
