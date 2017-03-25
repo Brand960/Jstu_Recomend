@@ -8,26 +8,26 @@ Jstu2016年科创项目前端
 		感谢大佬袁臻的后台（分析数据），我这边只是个空壳
 
 # 部署
-```
+```Bash
 sudo apt-get -y install python3 python3-pip nginx
 sudo pip3 install django uwsgi
 ```
 ## 文件夹
-Jstu/
+*Jstu
 
-├── manage.py
+	*manage.py
 
-├── jstuLib/
+	*jstuLib/
 
-│   ├── __init__.py
+		*__init__.py
 
-│   ├── settings.py
+		* settings.py
 
-│   ├── urls.py
+		* urls.py
 
-│   └── wsgi.py
+		*wsgi.py
 
-└── jstu.ini
+	*jstu.ini
 
 #### uwsgi设置
 		# jstu.ini file
@@ -80,11 +80,11 @@ Jstu/
 			 }
 		 }
 		 
-```python
+```Python
 manage.py collectstatic 收集静态资源
 ```
 
-```
+```Bash
 cd /home/Jstu
 uwsgi --ini jstu.ini 
 ```
