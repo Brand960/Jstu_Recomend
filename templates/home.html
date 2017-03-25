@@ -1,0 +1,76 @@
+﻿{% extends 'base.html' %}
+ 
+{% block title %}欢迎光临首页{% endblock %}
+ 
+{% block content %}
+<div class="container">
+	<div class="row" id="nav">
+		<div class="col-md-10">
+		<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
+		<ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a href="#">主页</a></li>
+			  <li role="presentation"><a href="#">图书</a></li>
+			  <li role="presentation"><a href="#">论文</a></li>
+		</ul>
+		</div>
+	</div>
+	<div class="row" id="jump">
+		<div class="col-md-10">
+		<div class="jumbotron">
+		  <h1>欢迎光临首页！</h1>
+		  <p>请于下方键入搜索内容</p>
+		  <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">了解更多</a></p>-->
+		  <form action="/show" method="get">
+		  <div class="col-md-6 input-group">
+			  <input type="text" class="form-control" placeholder="Search for..." name="keyword">
+			  <span class="input-group-btn">
+				<button class="btn btn-info" type="submit">搜索</button>
+			  </span>
+		  </div><!-- /.col-lg-6 -->
+		  </form>
+		</div>
+		</div>
+	</div>
+	<!--<div class="row" id="search">
+	  <div class="col-lg-6">
+		<div class="input-group">
+		  <input type="text" class="form-control" placeholder="Search for...">
+		  <span class="input-group-btn">
+			<button class="btn btn-default" type="button">Go!</button>
+		  </span>
+		</div> 
+	  </div>
+	</div>-->
+	<div class="row" id="icon">
+	    <div class="col-md-10">
+		<span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
+		</div>
+	</div>
+	<div class="row" id="content">
+		<div class="col-md-5">
+		<a href="#" class="list-group-item active">随机图书鉴赏</a>
+		<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
+			{%for item in res_book%}
+		  <li class="list-group-item">{{item.title}}</li>
+		  	{%endfor%}
+		</ul>
+		<!--推荐books：<br>
+		{%for item in res_book%}
+		{{item.title}}<br>
+		{%endfor%}!-->
+		</div>
+		<div class="col-md-5" >
+		<a href="#" class="list-group-item active">随机论文鉴赏</a>
+		<ul class="list-group" style="min-height:250px;overflow-y:auto;max-height:300px;">
+			{%for item in res_paper%}
+		  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></li>
+		  	{%endfor%}
+		</ul>
+		<!--推荐papers：<br>
+		{%for item in res_paper%}
+		{{item.title}}<br>
+		{%endfor%}-->
+		</div>
+	</div>
+</div>
+{% endblock %}

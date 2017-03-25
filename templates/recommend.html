@@ -1,0 +1,82 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}查询结果{% endblock %}
+ 
+{% block content %}
+<div class="container">
+	<div class="row" id="nav">
+		<div class="col-md-11">
+		<span></span>
+		<ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a href="#">主页</a></li>
+			  <li role="presentation"><a href="#">图书</a></li>
+			  <li role="presentation"><a href="#">论文</a></li>
+			  <li style="float:right "><a class="btn btn-primary" type="button" href="/">返回主页</a></li>
+		</ul>
+		</div>
+	</div>
+	<div class="row" id="icon">
+		<div class="col-md-11">
+		<span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
+		<span>以下结果根据 <b>{{res_paper.title}}</b> 进行推荐</span>
+		</div>
+	</div>
+	<div class="row" id="content">
+	<div class="col-md-11">
+	{% if res_rec_paper %}
+		<table class="table table-hover" >
+				<tr class="info" >
+					<td>标题</td>
+					<td>作者</td>
+					<td>标识</td>
+					<td>分类</td>
+					<td><font size="2px">出版商</font ></td>
+					<td><font size="2px">出版日期</font ></td>
+					<td><font size="2px">点击数</font></td>
+				</tr>
+				{%for item in res_rec_paper%}
+				  <tr>
+						<td><font size="2px">{{item.title}}</font></td>
+						<td><font size="2px">{{item.author}}</font></td>
+						<td><font size="2px">{{item.callId}}</font></td>
+						<td><font size="2px">{{item.isbn}}</font></td>
+						<td>{{item.publisher}}</td>
+						<td><font size="2px">{{item.pubYear}}</font></td>
+						<td>{{item.likeCount}}</td>
+				  </tr>
+				 {%endfor%}
+		</table>	
+	{% else %}
+		<span> &nbsp &nbsp &nbsp抱歉！系统并未有关于<b>{{res_paper.title}}</b> 的推荐</span>
+		<br>&nbsp &nbsp &nbsp你可以看看：
+	<div class="row" id="content">
+		<div class="col-md-5">
+			<a href="#" class="list-group-item active">随机图书鉴赏</a>
+			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
+				{%for item in res_book_r%}
+			  <li class="list-group-item">{{item.title}}</li>
+				{%endfor%}
+			</ul>
+			<!--推荐books：<br>
+			{%for item in res_book%}
+			{{item.title}}<br>
+			{%endfor%}!-->
+			</div>
+			<div class="col-md-5" >
+			<a href="#" class="list-group-item active">随机论文鉴赏</a>
+			<ul class="list-group" style="min-height:250px;overflow-y:auto;max-height:300px;">
+				{%for item in res_paper_r%}
+			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></li>
+				{%endfor%}
+			</ul>
+			<!--推荐papers：<br>
+			{%for item in res_paper%}
+			{{item.title}}<br>
+			{%endfor%}-->
+		</div>
+	</div>
+	{% endif %}
+	</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}查询结果{% endblock %}
+ 
+{% block content %}
+<div class="container">
+	<div class="row" id="nav">
+		<div class="col-md-11">
+		<span></span>
+		<ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a href="#">主页</a></li>
+			  <li role="presentation"><a href="#">图书</a></li>
+			  <li role="presentation"><a href="#">论文</a></li>
+			  <li style="float:right "><a class="btn btn-primary" type="button" href="/">返回主页</a></li>
+		</ul>
+		</div>
+	</div>
+	<div class="row" id="icon">
+		<div class="col-md-11">
+		<span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
+		当前关键词(字)：{{keyword}}
+		</div>
+	</div>
+	<div class="row" id="content">
+			<div class="col-md-6" style="min-height:550px;overflow-y:auto;max-height:300px;font-size:20px;">
+			<a href="#" class="list-group-item active">图书查询结果</a>
+			<table class="table table-hover table-condensed">
+				<tr class="info" style="height:75px;">
+					<td>标题</td>
+					<td>作者</td>
+					<td>标识</td>
+					<td>分类</td>
+					<td><font size="2px">出版日期</font ></td>
+					<td><font size="2px">点击数</font></td>
+				</tr>
+				{%for item in res_book%}
+				  <tr>
+						<td><font size="2px">{{item.title}}</font></td>
+						<td><font size="2px">{{item.author}}</font></td>
+						<td><font size="2px">{{item.callId}}</font></td>
+						<td><font size="2px">{{item.isbn}}</font></td>
+						<!--<td>{{item.publisher}}</td>-->
+						<td><font size="2px">{{item.pubYear}}</font></td>
+						<td>{{item.likeCount}}</td>
+				  </tr>
+				 {%endfor%}
+			</table>
+			<!--推荐books：<br>
+			{%for item in res_book%}
+			{{item.title}}<br>
+			{%endfor%}!-->
+			</div>
+			<div class="col-md-5" style="min-height:550px;overflow-y:auto;max-height:300px;font-size:20px;">
+			<a href="#" class="list-group-item active">论文查询结果</a>
+			<table class="table table-hover" >
+				<tr class="info" style="height:75px;">
+					
+					<td>标题</td>
+					<td>来源</td>
+					<td>ID</td>
+					<td><font size="2px">关键词</font></td>
+					<td><font size="2px">点击数</font></td>
+					
+				</tr>
+				{%for item in res_paper%}
+				  <tr title={{item.intro}} >
+						<td ><font size="2px"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></font></td>
+						<td><font size="2px">{{item.source}}</font></td>
+						<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>
+						<td><font size="2px">{{item.searchWord}}</font></td>
+						<td>{{item.likeCount}}</td>
+				  </tr>
+				 {%endfor%}
+			</table>
+			<!--推荐papers：<br>
+			{%for item in res_paper%}
+			{{item.title}}<br>
+			{%endfor%}-->
+			</div>
+		</div>
+</div>
+{% endblock %}
