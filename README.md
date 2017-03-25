@@ -13,21 +13,21 @@ sudo apt-get -y install python3 python3-pip nginx
 sudo pip3 install django uwsgi
 ```
 ## ÎÄ¼ş¼Ğ
-*Jstu
+* Jstu
 
-	*manage.py
+	* manage.py
 
-	*jstuLib/
+	* jstuLib/
 
-		*__init__.py
+		* __init__.py
 
 		* settings.py
 
 		* urls.py
 
-		*wsgi.py
+		* wsgi.py
 
-	*jstu.ini
+	* jstu.ini
 
 #### uwsgiÉèÖÃ
 		# jstu.ini file
