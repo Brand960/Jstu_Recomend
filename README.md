@@ -6,6 +6,90 @@ Jstu2016年科创项目前端
 		非常简陋
 		真的
 		感谢大佬袁臻的后台（分析数据），我这边只是个空壳
+
+# 部署
+```
+sudo apt-get -y install python3 python3-pip nginx
+sudo pip3 install django uwsgi
+```
+## 文件夹
+Jstu/
+
+├── manage.py
+
+├── jstuLib/
+
+│   ├── __init__.py
+
+│   ├── settings.py
+
+│   ├── urls.py
+
+│   └── wsgi.py
+
+└── jstu.ini
+
+#### uwsgi设置
+		# jstu.ini file
+		[uwsgi]
+
+		# Django-related settings
+
+		socket = :8000
+
+		# the base directory (full path)
+		chdir           = /home/jstu
+
+		# Django s wsgi file
+		module          = jstuLib.wsgi
+
+		# process-related settings
+		# master
+		master          = true
+
+		# maximum number of worker processes
+		processes       = 4
+
+		# ... with appropriate permissions - may be needed
+		# chmod-socket    = 664
+		# clear environment on exit
+		vacuum          = true
+		
+>jstu.ini文件放于Jstu下
+
+#### nginx server设置	
+		server {
+			listen         8099; 
+			server_name    127.0.0.1 
+			charset UTF-8;
+			access_log      /var/log/nginx/myweb_access.log;
+			error_log       /var/log/nginx/myweb_error.log;
+
+			client_max_body_size 75M;
+
+			location / { 
+				include uwsgi_params;
+				uwsgi_pass 127.0.0.1:8000;
+				uwsgi_read_timeout 2;
+			}   
+			location /static {
+				expires 30d;
+				autoindex on; 
+				add_header Cache-Control private;
+				alias /home/Jstu/static/;
+			 }
+		 }
+		 
+```python
+manage.py collectstatic 收集静态资源
+```
+
+```
+cd /home/Jstu
+uwsgi --ini jstu.ini 
+```
+		 
+# API地址
 http://120.77.57.236:8080
 # RESTful API设计
 >通过以下的api存取图书（book）、论文（paper）、收藏（collection）、行为（behavior）等资源。
