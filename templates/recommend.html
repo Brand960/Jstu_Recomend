@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<div class="row" id="content">
-	<div class="col-md-11">
+	<div class="col-md-6">
 	{% if res_rec_paper %}
 		<table class="table table-hover" >
 				<tr class="info" >
@@ -46,6 +46,8 @@
 				  </tr>
 				 {%endfor%}
 		</table>	
+	</div>
+	<div class="col-md-5">
 	{% elif res_rec_book %}
 		<table class="table table-hover" >
 				<tr class="info" style="height:75px;">
@@ -67,11 +69,12 @@
 						<td>{{item.likeCount}}</td>
 				  </tr>
 				 {%endfor%}
-		</table>	
+		</table>
+	</div>
 	{% else %}
 		<span> &nbsp &nbsp &nbsp抱歉！系统并未有关于<b>{%if res_paper%}{{res_paper.title}}{% else %}{{res_book.title}}{% endif%}</b> 的推荐</span>
 		<br>&nbsp &nbsp &nbsp你可以看看：
-	<div class="row" id="content">
+	<div class="row" id="content2">
 		<div class="col-md-5">
 			<a href="#" class="list-group-item active">随机图书鉴赏</a>
 			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
