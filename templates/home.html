@@ -48,28 +48,28 @@
 	</div>
 	<div class="row" id="content">
 		<div class="col-md-5">
-		<a href="#" class="list-group-item active">随机图书鉴赏</a>
-		<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
+			<a href="#" class="list-group-item active">随机图书鉴赏</a>
+			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
+				{%for item in res_book%}
+			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></li>
+				{%endfor%}
+			</ul>
+			<!--推荐books：<br>
 			{%for item in res_book%}
-		  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></li>
-		  	{%endfor%}
-		</ul>
-		<!--推荐books：<br>
-		{%for item in res_book%}
-		{{item.title}}<br>
-		{%endfor%}!-->
+			{{item.title}}<br>
+			{%endfor%}!-->
 		</div>
 		<div class="col-md-5" >
-		<a href="#" class="list-group-item active">随机论文鉴赏</a>
-		<ul class="list-group" style="min-height:250px;overflow-y:auto;max-height:300px;">
+			<a href="#" class="list-group-item active">随机论文鉴赏</a>
+			<ul class="list-group" style="min-height:250px;overflow-y:auto;max-height:300px;">
+				{%for item in res_paper%}
+			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></li>
+				{%endfor%}
+			</ul>
+			<!--推荐papers：<br>
 			{%for item in res_paper%}
-		  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></li>
-		  	{%endfor%}
-		</ul>
-		<!--推荐papers：<br>
-		{%for item in res_paper%}
-		{{item.title}}<br>
-		{%endfor%}-->
+			{{item.title}}<br>
+			{%endfor%}-->
 		</div>
 	</div>
 </div>

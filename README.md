@@ -91,6 +91,7 @@ uwsgi --ini jstu.ini
 		 
 # API地址
 http://120.77.57.236:8080
+
 # RESTful API设计
 >通过以下的api存取图书（book）、论文（paper）等资源。
 

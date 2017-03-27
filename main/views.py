@@ -42,27 +42,17 @@ def get_by_page(_type,_page,_size):
 	res=json.loads(req.text)
 	return res
 
-# def recommend_by_id(_type,_id):
-# 	if (_type=="book"):
-# 		url=URL+"books/recommend?id="+_id
-# 	elif(_type=="paper"):
-# 		url=URL+"papers/recommend?id="+_id
-# 	
-# 	req=requests.get(url)
-# 	res=json.loads(req.text)
-# 	return res
-
 def recommend__book_by_id(_type,_id):
-	url=URL+"/recommend/books?id="+_id+"&type="+_type
-	req=requests.get(url)
-	res=json.loads(req.text)
-	return res
+	url=URL+"recommend/books?id="+_id+"&type="+_type
+	req1=requests.get(url)
+	res1=json.loads(req1.text)
+	return res1
 
 def recommend__paper_by_id(_type,_id):
-	url=URL+"/recommend/papers?id="+_id+"&type="+_type
-	req=requests.get(url)
-	res=json.loads(req.text)
-	return res
+	url=URL+"recommend/papers?id="+_id+"&type="+_type
+	req2=requests.get(url)
+	res2=json.loads(req2.text)
+	return res2
 
 def home(request):
 	_page= str(random.randint(1, 2000))
@@ -85,7 +75,7 @@ def show(request):
 	return HttpResponse("抱歉！请输入查询关键字")
 	
 def recommend(request):	
-	
+
 	if request.GET['id']:
 		_page= str(random.randint(1, 2000))
 		_size=str(10)
@@ -95,6 +85,7 @@ def recommend(request):
 		_id=request.GET['id']
 		
 		_type=request.GET['type']
+		
 		res_rec_paper=recommend__paper_by_id(_type, _id)
 		res_rec_book=recommend__book_by_id(_type, _id)
 
@@ -106,6 +97,10 @@ def recommend(request):
 			res_book=get_by_id("book",_id)
 			return render(request,'recommend.html',{'res_book':res_book,"res_paper_r":res_paper_r,"res_book_r":res_book_r,
  																		'res_rec_paper':res_rec_paper,"res_rec_book":res_rec_book,})
+		else:
+			pass
+	return HttpResponse("抱歉！请输入查询关键字")
+
 # 		if request.GET['type']=="paper":
 # 			res_paper=get_by_id("paper",_id)
 # 			res_rec_paper=recommend_by_id("paper",_id)

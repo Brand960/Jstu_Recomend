@@ -22,70 +22,89 @@
 		</div>
 	</div>
 	<div class="row" id="content">
-	<div class="col-md-6">
-	{% if res_rec_paper %}
-		<table class="table table-hover" >
-				<tr class="info" >
-					<td>标题</td>
-					<td>作者</td>
-					<td>标识</td>
-					<td>分类</td>
-					<td><font size="2px">出版商</font ></td>
-					<td><font size="2px">出版日期</font ></td>
-					<td><font size="2px">点击数</font></td>
-				</tr>
-				{%for item in res_rec_paper%}
-				  <tr>
-						<td><font size="2px">{{item.title}}</font></td>
-						<td><font size="2px">{{item.author}}</font></td>
-						<td><font size="2px">{{item.callId}}</font></td>
-						<td><font size="2px">{{item.isbn}}</font></td>
-						<td>{{item.publisher}}</td>
-						<td><font size="2px">{{item.pubYear}}</font></td>
-						<td>{{item.likeCount}}</td>
-				  </tr>
-				 {%endfor%}
-		</table>	
-	</div>
-	<div class="col-md-5">
-	{% elif res_rec_book %}
-		<table class="table table-hover" >
-				<tr class="info" style="height:75px;">
-					<td><a href='/recommend/?id={{item.id}}&type=book'>标题</a></td>
-					<td>作者</td>
-					<td>标识</td>
-					<td>分类</td>
-					<td><font size="2px">出版日期</font ></td>
-					<td><font size="2px">点击数</font></td>
-				</tr>
-				{%for item in res_rec_book%}
-				  <tr>
-						<td><font size="2px">{{item.title}}</font></td>
-						<td><font size="2px">{{item.author}}</font></td>
-						<td><font size="2px">{{item.callId}}</font></td>
-						<td><font size="2px">{{item.isbn}}</font></td>
-						<!--<td>{{item.publisher}}</td>-->
-						<td><font size="2px">{{item.pubYear}}</font></td>
-						<td>{{item.likeCount}}</td>
-				  </tr>
-				 {%endfor%}
-		</table>
-	</div>
-	{% else %}
-		<span> &nbsp &nbsp &nbsp抱歉！系统并未有关于<b>{%if res_paper%}{{res_paper.title}}{% else %}{{res_book.title}}{% endif%}</b> 的推荐</span>
-		<br>&nbsp &nbsp &nbsp你可以看看：
-	<div class="row" id="content2">
-		<div class="col-md-5">
+		<div class="col-md-6" style="min-height:550px;overflow-y:auto;max-height:300px;font-size:20px;">
+		<a href="#" class="list-group-item active">图书推荐结果</a>
+		{% if res_rec_book %}
+			<table class="table table-hover table-condensed">
+					<tr class="info" style="height:75px;">
+						<td>标题</td>
+						<td>作者</td>
+						<td>标识</td>
+						<td>分类</td>
+						<td><font size="2px">出版日期</font ></td>
+						<td><font size="2px">点击数</font></td>
+					</tr>
+					{%for item in res_rec_book%}
+					  <tr>
+							<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></font></td>
+							<td><font size="2px">{{item.author}}</font></td>
+							<td><font size="2px">{{item.callId}}</font></td>
+							<td><font size="2px">{{item.isbn}}</font></td>
+							<!--<td>{{item.publisher}}</td>-->
+							<td><font size="2px">{{item.pubYear}}</font></td>
+							<td>{{item.likeCount}}</td>
+					  </tr>
+					 {%endfor%}
+			</table>
+		{%else%}
+		<span> &nbsp &nbsp &nbsp <font size=2px>抱歉！系统并未有关于<b>{%if res_paper%}{{res_paper.title}}{% else %}{{res_book.title}}{% endif%}</b> 的图书推荐</font></span>
+		<br>&nbsp &nbsp &nbsp <font size=2px>你可以看看</font>：
 			<a href="#" class="list-group-item active">随机图书鉴赏</a>
 			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
 				{%for item in res_book_r%}
-			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></li>
+			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=book'><font size=1.5px>{{item.title}}</font></a></li>
 				{%endfor%}
 			</ul>
 			<!--推荐books：<br>
 			{%for item in res_book%}
 			{{item.title}}<br>
 			{%endfor%}!-->
+		{%endif%}
+		</div>
+		<div class="col-md-5" style="min-height:550px;overflow-y:auto;max-height:300px;font-size:20px;">
+		<a href="#" class="list-group-item active">论文推荐结果</a>
+		{%if res_rec_paper%}
+			<table class="table table-hover table-condensed" >
+					<tr class="info" style="height:75px;">	
+						<td>标题</td>
+						<td>来源</td>
+						<td>ID</td>
+						<td><font size="2px">关键词</font></td>
+						<td><font size="2px">点击数</font></td>	
+					</tr>
+					{%for item in res_rec_paper%}
+					  <tr title={{item.intro}} >
+							<td ><font size="2px"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></font></td>
+							<td><font size="2px">{{item.source}}</font></td>
+							<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>
+							<td><font size="2px">{{item.searchWord}}</font></td>
+							<td>{{item.likeCount}}</td>
+					  </tr>
+					 {%endfor%}
+				</table>
+			{%else%}
+			<span> &nbsp &nbsp &nbsp <font size=2px>抱歉！系统并未有关于<b>{%if res_paper%}{{res_paper.title}}{% else %}{{res_book.title}}{% endif%}</b> 的论文推荐</font></span>
+			<br>&nbsp &nbsp &nbsp <font size=2px>你可以看看</font>：
+			<a href="#" class="list-group-item active">随机论文鉴赏</a>
+			<ul class="list-group" style="min-height:250px;overflow-y:auto;max-height:300px;">
+				{%for item in res_paper_r%}
+			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=paper'><font size=1.5px>{{item.title}}</font></a></li>
+				{%endfor%}
+			</ul>
+			{%endif%}	
+	</div>
+</div>
+<!--<div class="row" id="content2">
+	<span> &nbsp &nbsp &nbsp抱歉！系统并未有关于<b>{%if res_paper%}{{res_paper.title}}{% else %}{{res_book.title}}{% endif%}</b> 的推荐</span>
+		<br>&nbsp &nbsp &nbsp你可以看看：
+		<div class="col-md-5">
+			<a href="#" class="list-group-item active">随机图书鉴赏</a>
+			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
+				{%for item in res_book_r%}
+			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=book'><font size=1.5px>{{item.title}}</font></a></li>
+				{%endfor%}
+			</ul>
+
 			</div>
 			<div class="col-md-5" >
 			<a href="#" class="list-group-item active">随机论文鉴赏</a>
@@ -94,14 +113,8 @@
 			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></li>
 				{%endfor%}
 			</ul>
-			<!--推荐papers：<br>
-			{%for item in res_paper%}
-			{{item.title}}<br>
-			{%endfor%}-->
+
 		</div>
-	</div>
-	{% endif %}
-	</div>
-	</div>
+	</div>-->
 </div>
 {% endblock %}
