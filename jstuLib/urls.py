@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from main import views
-
+# Django路由正则匹配设置
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    #主页
     url(r'^$', views.home, name='home'),
+    #展示查询结果
     url(r'^show/$', views.show, name='show'),
+    #根据图书/论文返回推荐
     url(r'^recommend/$', views.recommend, name='recommend'),
 ]
