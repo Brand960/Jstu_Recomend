@@ -27,7 +27,7 @@
 	<div class="row" id="content">
 			<div class="col-md-6" style="min-height:550px;overflow-y:auto;max-height:300px;font-size:20px;">
 			<a href="#" class="list-group-item active">图书查询结果</a>
-			<table class="table table-hover table-condensed">
+			<table class="table table-hover" >
 				<tr class="info" style="height:75px;">
 					<td>标题</td>
 					<td>作者</td>
@@ -36,17 +36,34 @@
 					<td><font size="2px">出版日期</font ></td>
 					<td><font size="2px">点击数</font></td>
 				</tr>
+				
 				{%for item in res_book%}
-				  <tr>
-						<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></font></td>
-						<td><font size="2px">{{item.author}}</font></td>
-						<td><font size="2px">{{item.callId}}</font></td>
-						<td><font size="2px">{{item.isbn}}</font></td>
-						<!--<td>{{item.publisher}}</td>-->
-						<td><font size="2px">{{item.pubYear}}</font></td>
-						<td>{{item.likeCount}}</td>
-				  </tr>
-				 {%endfor%}
+				<tr data-toggle="modal" data-target="#myModal{{item.callId}}">
+					<!-- 模态框（Modal） -->
+					<div class="modal fade" id="myModal{{item.callId}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">《{{item.title}}》的详细资料</h4>
+								</div>
+								<div class="modal-body">图书ID：{{item.callId}}<br>作者：{{item.author}}<br>出版社：{{item.publisher}}<br>出版年月：{{item.pubYear}}<br>中图法分类：{{item.isbn}}</div>
+								<div class="modal-footer">
+									<a class="btn btn-primary" target="none" type="button" href="http://120.77.57.236:8080/feedback/like?id={{item.id}}&type=book">赞</a>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+					<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></font></td>
+					<td><font size="2px">{{item.author}}</font></td>
+					<td><font size="2px">{{item.callId}}</font></td>
+					<td><font size="2px">{{item.isbn}}</font></td>
+					<!--<td>{{item.publisher}}</td>-->
+					<td><font size="2px">{{item.pubYear}}</font></td>
+					<td>{{item.likeCount}}</td>
+				</tr>
+				{%endfor%}
 			</table>
 			<!--推荐books：<br>
 			{%for item in res_book%}
@@ -66,14 +83,30 @@
 					
 				</tr>
 				{%for item in res_paper%}
-				  <tr title={{item.intro}} >
-						<td ><font size="2px"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></font></td>
-						<td><font size="2px">{{item.source}}</font></td>
-						<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>
-						<td><font size="2px">{{item.searchWord}}</font></td>
-						<td>{{item.likeCount}}</td>
-				  </tr>
-				 {%endfor%}
+				<tr title={{item.intro}} data-toggle="modal" data-target="#myModal{{item.id}}">
+				    <!-- 模态框（Modal） -->
+					<div class="modal fade" id="myModal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">《{{item.title}}》的详细资料</h4>
+								</div>
+								<div class="modal-body">论文ID：{{item.paperId}}<br>链接：{{item.url}}<br>简介：{{item.intro}}</div>
+								<div class="modal-footer">
+									<a class="btn btn-primary" target="none" type="button" href="http://120.77.57.236:8080/feedback/like?id={{item.id}}&type=paper">赞</a>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+					<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></font></td>
+					<td><font size="2px">{{item.source}}</font></td>
+					<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>
+					<td><font size="2px">{{item.searchWord}}</font></td>
+					<td>{{item.likeCount}}</td>
+				</tr>
+				{%endfor%}
 			</table>
 			<!--推荐papers：<br>
 			{%for item in res_paper%}

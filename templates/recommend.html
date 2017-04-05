@@ -38,7 +38,22 @@
 						<td><font size="2px">点击数</font></td>
 					</tr>
 					{%for item in res_rec_book%}
-					  <tr>
+					  <tr data-toggle="modal" data-target="#myModal{{item.callId}}">
+						<!-- 模态框（Modal） -->
+						<div class="modal fade" id="myModal{{item.callId}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">《{{item.title}}》的详细资料</h4>
+									</div>
+									<div class="modal-body">图书ID：{{item.callId}}<br>作者：{{item.author}}<br>出版社：{{item.publisher}}<br>出版年月：{{item.pubYear}}<br>中图法分类：{{item.isbn}}</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									</div>
+								</div><!-- /.modal-content -->
+							</div><!-- /.modal -->
+						</div>
 							<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></font></td>
 							<td><font size="2px">{{item.author}}</font></td>
 							<td><font size="2px">{{item.callId}}</font></td>
@@ -56,8 +71,22 @@
 			<a href="#" class="list-group-item active">随机图书鉴赏</a>
 			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
 				{%for item in res_book_r%}
-			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=book'><font size=1.5px>{{item.title}}</font></a></li>
-				{%endfor%}
+			  <li style="font-size:2px"class="list-group-item" data-toggle="modal" data-target="#myModal{{item.callId}}"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></li>
+				<!-- 模态框（Modal） -->
+					<div class="modal fade" id="myModal{{item.callId}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">《{{item.title}}》的详细资料</h4>
+								</div>
+								<div class="modal-body">图书ID：{{item.callId}}<br>作者：{{item.author}}<br>出版社：{{item.publisher}}<br>出版年月：{{item.pubYear}}<br>中图法分类：{{item.isbn}}</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>{%endfor%}
 			</ul>
 			<!--推荐books：<br>
 			{%for item in res_book%}
@@ -77,7 +106,22 @@
 						<td><font size="2px">点击数</font></td>	
 					</tr>
 					{%for item in res_rec_paper%}
-					  <tr title={{item.intro}} >
+					  <tr title={{item.intro}} data-toggle="modal" data-target="#myModal{{item.id}}">
+						<!-- 模态框（Modal） -->
+						<div class="modal fade" id="myModal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">《{{item.title}}》的详细资料</h4>
+									</div>
+									<div class="modal-body">论文ID：{{item.paperId}}<br>链接：{{item.url}}<br>简介：{{item.intro}}</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									</div>
+								</div><!-- /.modal-content -->
+							</div><!-- /.modal -->
+						</div>
 							<td ><font size="2px"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></font></td>
 							<td><font size="2px">{{item.source}}</font></td>
 							<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>
@@ -92,8 +136,22 @@
 			<a href="#" class="list-group-item active">随机论文鉴赏</a>
 			<ul class="list-group" style="min-height:250px;overflow-y:auto;max-height:300px;">
 				{%for item in res_paper_r%}
-			  <li class="list-group-item"><a href='/recommend/?id={{item.id}}&type=paper'><font size=1.5px>{{item.title}}</font></a></li>
-				{%endfor%}
+			  <li style="font-size:2px"class="list-group-item" title={{item.intro}} data-toggle="modal" data-target="#myModal{{item.id}}"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></li>
+				<!-- 模态框（Modal） -->
+					<div class="modal fade" id="myModal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">《{{item.title}}》的详细资料</h4>
+								</div>
+								<div class="modal-body">论文ID：{{item.paperId}}<br>链接：{{item.url}}<br>简介：{{item.intro}}</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>{%endfor%}
 			</ul>
 			{%endif%}	
 	</div>
