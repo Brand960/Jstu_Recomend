@@ -3,6 +3,30 @@
 {% block title %}查询结果{% endblock %}
  <!--覆写content区块 -->
 {% block content %}
+<script type="text/javascript">
+function myFunction(ID,TYPE)
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  alert("点赞成功！");
+  
+var URL="http://120.77.57.236:8080/feedback/like"+"?id="+ID+"&type="+TYPE;
+
+xmlhttp.open("GET",URL,false);
+xmlhttp.send();
+
+//$.get(URL,function(data,status){
+  //  alert("Data: " + data + "\nStatus: " + status);
+ // });
+}
+</script>
 <div class="container">
 	<!--导航栏 -->
 	<div class="row" id="nav">
@@ -34,7 +58,7 @@
 					<td>标识</td>
 					<td>分类</td>
 					<td><font size="2px">出版日期</font ></td>
-					<td><font size="2px">点击数</font></td>
+					<!--<td><font size="2px">点击数</font></td>-->
 				</tr>
 				
 				{%for item in res_book%}
@@ -49,8 +73,10 @@
 								</div>
 								<div class="modal-body">图书ID：{{item.callId}}<br>作者：{{item.author}}<br>出版社：{{item.publisher}}<br>出版年月：{{item.pubYear}}<br>中图法分类：{{item.isbn}}</div>
 								<div class="modal-footer">
-									<a class="btn btn-primary" target="none" type="button" href="http://120.77.57.236:8080/feedback/like?id={{item.id}}&type=book">赞</a>
+									<!--<a class="btn btn-primary" target="none" type="button" href="http://120.77.57.236:8080/feedback/like?id={{item.id}}&type=book">赞</a>-->
+									<button type="button" class="btn btn-primary" onclick="myFunction({{item.id}},'book')" id="bookLike">赞</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
 								</div>
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
@@ -61,7 +87,7 @@
 					<td><font size="2px">{{item.isbn}}</font></td>
 					<!--<td>{{item.publisher}}</td>-->
 					<td><font size="2px">{{item.pubYear}}</font></td>
-					<td>{{item.likeCount}}</td>
+					<!--<td>{{item.likeCount}}</td>-->
 				</tr>
 				{%endfor%}
 			</table>
@@ -79,7 +105,7 @@
 					<td>来源</td>
 					<td>ID</td>
 					<td><font size="2px">关键词</font></td>
-					<td><font size="2px">点击数</font></td>
+					<!--<td><font size="2px">点击数</font></td>-->
 					
 				</tr>
 				{%for item in res_paper%}
@@ -94,7 +120,7 @@
 								</div>
 								<div class="modal-body">论文ID：{{item.paperId}}<br>链接：{{item.url}}<br>简介：{{item.intro}}</div>
 								<div class="modal-footer">
-									<a class="btn btn-primary" target="none" type="button" href="http://120.77.57.236:8080/feedback/like?id={{item.id}}&type=paper">赞</a>
+									<button type="button" class="btn btn-primary" onclick="myFunction({{item.id}},'paper')" id="bookLike">赞</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
@@ -104,7 +130,7 @@
 					<td><font size="2px">{{item.source}}</font></td>
 					<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>
 					<td><font size="2px">{{item.searchWord}}</font></td>
-					<td>{{item.likeCount}}</td>
+					<!--<td>{{item.likeCount}}</td>-->
 				</tr>
 				{%endfor%}
 			</table>

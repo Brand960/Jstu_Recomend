@@ -1,10 +1,10 @@
 ﻿{% extends 'base.html' %}
 {% block title %}欢迎光临首页{% endblock %}
 {% block content %}
-<div class="container">
+<div class="container" >
 	<!--导航栏 -->
 	<div class="row" id="nav">
-		<div class="col-md-10">
+		<div class="col-md-11">
 		<ul class="nav nav-tabs">
 			  <li role="presentation" class="active"><a href="#">主页</a></li>
 			  <li role="presentation"><a href="#">图书</a></li>
@@ -14,7 +14,7 @@
 	</div>
 	<!--巨幕-->
 	<div class="row" id="jump">
-		<div class="col-md-10">
+		<div class="col-md-11">
 		<div class="jumbotron"  style=" background-image:url(/static/pic/Lib.jpg)">
 		  <h2>江苏理工学院图书馆欢迎您使用！</h2>
 		  <p>请于下方键入搜索内容</p>
@@ -38,7 +38,7 @@
 	</div>
 	<!--图书论文展示区 -->
 	<div class="row" id="content">
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<a href="#" class="list-group-item active">随机图书鉴赏</a>
 			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
 				{%for item in res_book%}
