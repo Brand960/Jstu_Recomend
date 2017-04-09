@@ -1,17 +1,17 @@
 # jstu_Recomend
-Jstu2016年科创项目前端
+Jstu2016年计算机学院科创项目前端
 ====================
 3月24日始
 --------------
-		非常简陋
-		真的
-		感谢大佬袁臻的后台（分析数据），我这边只是个空壳
+		袁臻的Spark后台（分析数据,推荐数据），本人前台显示，响应。
 
 # 部署
 ```Bash
 sudo apt-get -y install python3 python3-pip nginx
 sudo pip3 install django uwsgi
 ```
+
+# 目录
 ## 文件夹
 * Jstu
 
@@ -90,7 +90,8 @@ uwsgi --ini jstu.ini
 ```
 		 
 # API地址
-http://120.77.57.236:8080
+
+	http://120.77.57.236:8080
 
 # RESTful API设计
 >通过以下的api存取图书（book）、论文（paper）等资源。
