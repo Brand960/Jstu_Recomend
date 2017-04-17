@@ -51,9 +51,13 @@ def recommend(request):
 	# 非正常访问处理
 	return HttpResponse("抱歉！未知错误，请刷新试试")
 	
-	
-	
-	
+def like(request):
+	# 获取论文/图书的ID
+	_id=request.GET['id']
+	# 获取类型
+	_type=request.GET['type']
+	liked=ilike(_type,_id)
+	return HttpResponse(liked)	
 	
 	
 	

@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^show/$', views.show, name='show'),
     #根据图书/论文返回推荐
     url(r'^recommend/$', views.recommend, name='recommend'),
+    #反馈
+    url(r'^like/$', views.like, name='like'),
 ]

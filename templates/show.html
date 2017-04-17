@@ -6,25 +6,10 @@
 <script type="text/javascript">
 function myFunction(ID,TYPE)
 {
-var xmlhttp;
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  alert("点赞成功！");
-  
-var URL="http://120.77.57.236:8080/feedback/like"+"?id="+ID+"&type="+TYPE;
-
-xmlhttp.open("GET",URL,false);
-xmlhttp.send();
-
-//$.get(URL,function(data,status){
-  //  alert("Data: " + data + "\nStatus: " + status);
- // });
+	id="#"+ID;
+	//var URL="http://120.77.57.236:8080/feedback/like"+"?id="+ID+"&type="+TYPE;
+	//var URL="/like?id="+ID+"&type="+TYPE; 
+	$.get("/like/",{'id':ID,'type':TYPE},$(id).show());
 }
 </script>
 <div class="container">
@@ -74,9 +59,9 @@ xmlhttp.send();
 								<div class="modal-body">图书ID：{{item.callId}}<br>作者：{{item.author}}<br>出版社：{{item.publisher}}<br>出版年月：{{item.pubYear}}<br>中图法分类：{{item.isbn}}</div>
 								<div class="modal-footer">
 									<!--<a class="btn btn-primary" target="none" type="button" href="http://120.77.57.236:8080/feedback/like?id={{item.id}}&type=book">赞</a>-->
+									<label id="{{item.id}}" style="color: red;display: none">谢谢反馈！</label>
 									<button type="button" class="btn btn-primary" onclick="myFunction({{item.id}},'book')" id="bookLike">赞</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-
 								</div>
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
@@ -120,6 +105,7 @@ xmlhttp.send();
 								</div>
 								<div class="modal-body">论文ID：{{item.paperId}}<br>链接：{{item.url}}<br>简介：{{item.intro}}</div>
 								<div class="modal-footer">
+									<label id="{{item.id}}" style="color: red;display: none">谢谢反馈！</label>
 									<button type="button" class="btn btn-primary" onclick="myFunction({{item.id}},'paper')" id="bookLike">赞</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>

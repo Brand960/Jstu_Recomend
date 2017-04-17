@@ -43,5 +43,11 @@ def recommend__paper_by_id(_type,_id):
     res2=json.loads(req2.text)
     return res2
 
+def ilike(_type,_id):
+    url="http://120.77.57.236:8080/feedback/like?id="+_id+"&type="+_type
+    like=requests.get(url)
+    like=json.loads(like.text)
+    return like
+
 class MainConfig(AppConfig):
     name = 'main'
