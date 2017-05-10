@@ -26,26 +26,33 @@ def recommend(request):
 
 	# 正常访问下
 	if request.GET['id']:
-		_page= str(random.randint(1, 2000))
+		_page=str(random.randint(1, 2000))
 		_size=str(10)
+
 		res_book_r=get_by_page("book",_page,_size)
 		res_paper_r=get_by_page("paper",_page,_size)
 		# 获取论文/图书的ID
 		_id=request.GET['id']
 		# 获取类型
 		_type=request.GET['type']
+		if request.GET['weight']:
+			_weight=str(request.GET['weight'])
+		else:
+			_weight=str(2)
 		# 获取推荐结果
-		res_rec_paper=recommend__paper_by_id(_type, _id)
-		res_rec_book=recommend__book_by_id(_type, _id)
+		res_rec_paper=recommend__paper_by_id(_type, _id,_weight)
+		res_rec_book=recommend__book_by_id(_type,_id,_weight)
 		# 根据查询类型不同分别返回被查询的对象
 		if _type=="paper":
 			res_paper=get_by_id("paper",_id)
 			return render(request,'recommend.html',{'res_paper':res_paper,"res_paper_r":res_paper_r,"res_book_r":res_book_r,
- 																		'res_rec_paper':res_rec_paper,"res_rec_book":res_rec_book,})
+ 																		'res_rec_paper':res_rec_paper,"res_rec_book":res_rec_book,
+																		 'weight':_weight,})
 		elif _type=="book":
 			res_book=get_by_id("book",_id)
 			return render(request,'recommend.html',{'res_book':res_book,"res_paper_r":res_paper_r,"res_book_r":res_book_r,
- 																		'res_rec_paper':res_rec_paper,"res_rec_book":res_rec_book,})
+ 																		'res_rec_paper':res_rec_paper,"res_rec_book":res_rec_book,
+																		 'weight':_weight,})
 		else:
 			pass
 	# 非正常访问处理

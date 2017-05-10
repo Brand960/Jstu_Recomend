@@ -2,7 +2,7 @@ from django.apps import AppConfig
 import requests
 import json
 # 分析后台api设置
-URL="http://120.77.57.236:8080/"
+URL="http://120.77.57.236:8002/"
 # 根据关键字次及图书/论文对象获取结果
 def get_by_keyword(_type,_keyword):
     if (_type=="book"):
@@ -30,15 +30,17 @@ def get_by_page(_type,_page,_size):
     req=requests.get(url)
     res=json.loads(req.text)
     return res
+
 # 通过图书推荐
-def recommend__book_by_id(_type,_id):
-    url=URL+"recommend/books?id="+_id+"&type="+_type
+def recommend__book_by_id(_type,_id,_weight):
+    url=URL+"recommend/books?id="+_id+"&type="+_type+"&weight="+_weight
     req1=requests.get(url)
     res1=json.loads(req1.text)
     return res1
+
 # 通过论文推荐
-def recommend__paper_by_id(_type,_id):
-    url=URL+"recommend/papers?id="+_id+"&type="+_type
+def recommend__paper_by_id(_type,_id,_weight):
+    url=URL+"recommend/papers?id="+_id+"&type="+_type+"&weight="+_weight
     req2=requests.get(url)
     res2=json.loads(req2.text)
     return res2

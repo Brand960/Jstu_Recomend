@@ -56,7 +56,7 @@ function myFunction(ID,TYPE)
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									<h4 class="modal-title" id="myModalLabel">《{{item.title}}》的详细资料</h4>
 								</div>
-								<div class="modal-body">图书ID：{{item.callId}}<br>作者：{{item.author}}<br>出版社：{{item.publisher}}<br>出版年月：{{item.pubYear}}<br>中图法分类：{{item.isbn}}</div>
+								<div class="modal-body">图书ID：{{item.callId}}<br>作者：{{item.author}}<br>出版社：{{item.publisher}}<br>出版年月：{{item.pubYear}}<br>中图法分类：{{item.callName}}</div>
 								<div class="modal-footer">
 									<!--<a class="btn btn-primary" target="none" type="button" href="http://120.77.57.236:8080/feedback/like?id={{item.id}}&type=book">赞</a>-->
 									<label id="{{item.id}}" style="color: red;display: none">谢谢反馈！</label>
@@ -66,10 +66,10 @@ function myFunction(ID,TYPE)
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
-					<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></font></td>
+					<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=book&weight='>{{item.title}}</a></font></td>
 					<td><font size="2px">{{item.author}}</font></td>
 					<td><font size="2px">{{item.callId}}</font></td>
-					<td><font size="2px">{{item.isbn}}</font></td>
+					<td><font size="2px">{{item.callName}}</font></td>
 					<!--<td>{{item.publisher}}</td>-->
 					<td><font size="2px">{{item.pubYear}}</font></td>
 					<!--<td>{{item.likeCount}}</td>-->
@@ -88,7 +88,7 @@ function myFunction(ID,TYPE)
 					
 					<td>标题</td>
 					<td>来源</td>
-					<td>ID</td>
+					<td>领域</td>
 					<td><font size="2px">关键词</font></td>
 					<!--<td><font size="2px">点击数</font></td>-->
 					
@@ -112,10 +112,11 @@ function myFunction(ID,TYPE)
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
-					<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></font></td>
-					<td><font size="2px">{{item.source}}</font></td>
-					<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>
-					<td><font size="2px">{{item.searchWord}}</font></td>
+					<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=paper&weight='>{{item.title}}</a></font></td>
+					<td><font size="2px">{{item.author}}</font></td>
+					<!--<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>-->
+					<td><font size="2px">{{item.field}}</font></td>
+					<td><font size="2px">{{item.indexTerm}}</font></td>
 					<!--<td>{{item.likeCount}}</td>-->
 				</tr>
 				{%endfor%}

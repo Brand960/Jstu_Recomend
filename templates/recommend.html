@@ -18,9 +18,9 @@ function myFunction(ID,TYPE)
 		<div class="col-md-11">
 		<span></span>
 		<ul class="nav nav-tabs">
-			  <li role="presentation" class="active"><a href="#">主页</a></li>
-			  <li role="presentation"><a href="#">图书</a></li>
-			  <li role="presentation"><a href="#">论文</a></li>
+			  <li role="presentation" {%ifequal weight '2'%}class="active"{% endifequal %}>{%if res_paper%}<a href='/recommend/?id={{res_paper.id}}&type=paper&weight=2'>标准</a>{% else %}<a href='/recommend/?id={{res_book.id}}&type=book&weight=2'>标准</a>{% endif%}</li>
+			  <li role="presentation" {%ifequal weight '1'%}class="active"{% endifequal %}>{%if res_paper%}<a href='/recommend/?id={{res_paper.id}}&type=paper&weight=1'>精确</a>{% else %}<a href='/recommend/?id={{res_book.id}}&type=book&weight=1'>精确</a>{% endif%}</li>
+			  <li role="presentation" {%ifequal weight '3'%}class="active"{% endifequal %}>{%if res_paper%}<a href='/recommend/?id={{res_paper.id}}&type=paper&weight=3'>多样</a>{% else %}<a href='/recommend/?id={{res_book.id}}&type=book&weight=3'>多样</a>{% endif%}</li>
 			  <li style="float:right "><a class="btn btn-primary" type="button" href="/">返回主页</a></li>
 		</ul>
 		</div>
@@ -28,7 +28,11 @@ function myFunction(ID,TYPE)
 	<div class="row" id="icon">
 		<div class="col-md-11">
 		<span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
-		<span>以下结果根据 <b>{%if res_paper%}{{res_paper.title}}{% else %}{{res_book.title}}{% endif%}</b> 进行推荐</span>
+		<span>以下结果根据 <b>{%if res_paper%}{{res_paper.title}}{% else %}{{res_book.title}}{% endif%}</b> 进行
+		<b>{%ifequal weight '1'%}精确{% endifequal %}
+			{%ifequal weight '2'%}标准{% endifequal %}
+			{%ifequal weight '3'%}多样{% endifequal %}
+			</b>推荐</span>
 		</div>
 	</div>
 	<!--展示推荐结果 -->
@@ -56,7 +60,7 @@ function myFunction(ID,TYPE)
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									<h4 class="modal-title" id="myModalLabel">《{{item.title}}》的详细资料</h4>
 								</div>
-								<div class="modal-body">图书ID：{{item.callId}}<br>作者：{{item.author}}<br>出版社：{{item.publisher}}<br>出版年月：{{item.pubYear}}<br>中图法分类：{{item.isbn}}</div>
+								<div class="modal-body">图书ID：{{item.callId}}<br>作者：{{item.author}}<br>出版社：{{item.publisher}}<br>出版年月：{{item.pubYear}}<br>中图法分类：{{item.callName}}</div>
 								<div class="modal-footer">
 									<label id="{{item.id}}" style="color: red;display: none">谢谢反馈！</label>
 									<button type="button" class="btn btn-primary" onclick="myFunction({{item.id}},'book')" id="bookLike">赞</button>
@@ -65,13 +69,13 @@ function myFunction(ID,TYPE)
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
-							<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></font></td>
-							<td><font size="2px">{{item.author}}</font></td>
-							<td><font size="2px">{{item.callId}}</font></td>
-							<td><font size="2px">{{item.isbn}}</font></td>
-							<!--<td>{{item.publisher}}</td>-->
-							<td><font size="2px">{{item.pubYear}}</font></td>
-							<!--<td>{{item.likeCount}}</td>-->
+						<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=book&weight='>{{item.title}}</a></font></td>
+						<td><font size="2px">{{item.author}}</font></td>
+						<td><font size="2px">{{item.callId}}</font></td>
+						<td><font size="2px">{{item.callName}}</font></td>
+						<!--<td>{{item.publisher}}</td>-->
+						<td><font size="2px">{{item.pubYear}}</font></td>
+						<!--<td>{{item.likeCount}}</td>-->
 					  </tr>
 					 {%endfor%}
 			</table>
@@ -82,7 +86,7 @@ function myFunction(ID,TYPE)
 			<a href="#" class="list-group-item active">随机图书鉴赏</a>
 			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
 				{%for item in res_book_r%}
-			  <li style="font-size:2px"class="list-group-item" data-toggle="modal" data-target="#myModal{{item.callId}}"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></li>
+			  <li style="font-size:2px"class="list-group-item" data-toggle="modal" data-target="#myModal{{item.callId}}"><a href='/recommend/?id={{item.id}}&type=book&weight='>{{item.title}}</a></li>
 				<!-- 模态框（Modal） -->
 					<div class="modal fade" id="myModal{{item.callId}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -137,11 +141,11 @@ function myFunction(ID,TYPE)
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
-							<td ><font size="2px"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></font></td>
-							<td><font size="2px">{{item.source}}</font></td>
-							<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>
-							<td><font size="2px">{{item.searchWord}}</font></td>
-							<!--<td>{{item.likeCount}}</td>-->
+							<td><font size="2px"><a href='/recommend/?id={{item.id}}&type=paper&weight='>{{item.title}}</a></font></td>
+							<td><font size="2px">{{item.author}}</font></td>
+							<!--<td><font size="2px"><a href={{item.url}}>{{item.paperId}}</a></font></td>-->
+							<td><font size="2px">{{item.field}}</font></td>
+							<td><font size="2px">{{item.indexTerm}}</font></td>
 					  </tr>
 					 {%endfor%}
 				</table>
@@ -151,7 +155,7 @@ function myFunction(ID,TYPE)
 			<a href="#" class="list-group-item active">随机论文鉴赏</a>
 			<ul class="list-group" style="min-height:250px;overflow-y:auto;max-height:300px;">
 				{%for item in res_paper_r%}
-			  <li style="font-size:2px"class="list-group-item" title={{item.intro}} data-toggle="modal" data-target="#myModal{{item.id}}"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></li>
+			  <li style="font-size:2px"class="list-group-item" title={{item.intro}} data-toggle="modal" data-target="#myModal{{item.id}}"><a href='/recommend/?id={{item.id}}&type=paper&weight='>{{item.title}}</a></li>
 				<!-- 模态框（Modal） -->
 					<div class="modal fade" id="myModal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
