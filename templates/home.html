@@ -43,7 +43,7 @@
 			<a href="#" class="list-group-item active">随机图书鉴赏</a>
 			<ul class="list-group"  style="min-height:250px;overflow-y:auto;max-height:300px;">
 				{%for item in res_book%}
-				<li class="list-group-item" data-toggle="modal" data-target="#myModal{{item.callId}}"><a href='/recommend/?id={{item.id}}&type=book'>{{item.title}}</a></li>
+				<li class="list-group-item" data-toggle="modal" data-target="#myModal{{item.callId}}"><a href='/recommend/?id={{item.id}}&type=book&weight='>{{item.title}}</a></li>
 				<!-- 模态框（Modal） -->
 					<div class="modal fade" id="myModal{{item.callId}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -66,7 +66,7 @@
 			<a href="#" class="list-group-item active">随机论文鉴赏</a>
 			<ul class="list-group" style="min-height:250px;overflow-y:auto;max-height:300px;">
 				{%for item in res_paper%}
-				<li class="list-group-item" title={{item.intro}} data-toggle="modal" data-target="#myModal{{item.id}}"><a href='/recommend/?id={{item.id}}&type=paper'>{{item.title}}</a></li>
+				<li class="list-group-item" title={{item.intro}} data-toggle="modal" data-target="#myModal{{item.id}}"><a href='/recommend/?id={{item.id}}&type=paper&weight='>{{item.title}}</a></li>
 				<!-- 模态框（Modal） -->
 					<div class="modal fade" id="myModal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
